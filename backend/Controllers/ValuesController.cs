@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using System.Text;
+using backend.model;
+using backend.Repository;
 
 namespace backend.Controllers
 {
@@ -11,11 +13,13 @@ namespace backend.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private AppDbContext dbContext;
         private readonly HttpClient _httpClient;
 
-        public ValuesController(IHttpClientFactory httpClientFactory)
+        public ValuesController(IHttpClientFactory httpClientFactory, AppDbContext dbContext)
         {
             _httpClient = httpClientFactory.CreateClient();
+            this.dbContext = dbContext;
         }
 
         [HttpPost("login")]
@@ -45,5 +49,29 @@ namespace backend.Controllers
             var responseContent = await response.Content.ReadAsStringAsync();
             return Ok(responseContent);
         }
+
+        [HttpPost("save-user-locations")]
+        public IActionResult SaveUserLocations([FromBody] List<UserLocationDTO> locations)
+        {
+            if (locations == null || !locations.Any())
+                return BadRequest("No locations received");
+            int i = 0;
+            foreach (var loc in locations)
+            {
+                var locationEntity = new UserLocation
+                {
+                    LocationID = ++i,
+                    LocationCode = loc.Location_Code,
+                    LocationName = loc.Location_Name,
+                };
+
+                dbContext.UserLocation.Add(locationEntity);
+            }
+
+            dbContext.SaveChanges();
+
+            return Ok(new { message = "Locations saved successfully" });
+        }
+
     }
 }

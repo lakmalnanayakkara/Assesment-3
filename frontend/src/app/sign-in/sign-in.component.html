@@ -2,13 +2,23 @@
   <h1>Sign In</h1>
   <form [formGroup]="signInForm" (ngSubmit)="onSubmit()" class="sign-in-form">
     <mat-form-field>
-      <mat-label>Enter your email</mat-label>
+      <mat-label>Enter your Username</mat-label>
       <input
         matInput
         placeholder="pat@example.com"
         formControlName="username"
         required
       />
+      <mat-error
+        *ngIf="
+          signInForm.controls.username.touched &&
+          signInForm.controls.username.invalid
+        "
+      >
+        <span *ngIf="signInForm.controls.username.hasError('required')"
+          >Username is required</span
+        >
+      </mat-error>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Enter your password</mat-label>
@@ -17,17 +27,27 @@
         formControlName="password"
         [type]="hide() ? 'password' : 'text'"
       />
-      <button
+      <div
         matIconButton
         matSuffix
         (click)="clickEvent($event)"
         [attr.aria-label]="'Hide password'"
         [attr.aria-pressed]="hide()"
       >
-        <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
-      </button>
+        <mat-icon class="icon">{{
+          hide() ? "visibility_off" : "visibility"
+        }}</mat-icon>
+      </div>
+      <mat-error *ngIf="signInForm.controls.password.hasError('required')"
+        >Password is required</mat-error
+      >
     </mat-form-field>
-    <button matButton="filled" class="btn btn-success" type="submit">
+    <button
+      mat-flat-button
+      color="primary"
+      type="submit"
+      [disabled]="signInForm.invalid || signInForm.untouched"
+    >
       Sign In
     </button>
   </form>

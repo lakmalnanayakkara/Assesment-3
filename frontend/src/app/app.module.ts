@@ -14,6 +14,7 @@ import { AppService } from './service/app.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MaterialModule } from './shared/material-module';
 
 @NgModule({
   declarations: [AppComponent, BillFormComponent, SignInComponent],
@@ -29,6 +30,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     HttpClientModule,
     MatCardModule,
     MatAutocompleteModule,
+    MaterialModule,
   ],
   providers: [AppService],
   bootstrap: [AppComponent],

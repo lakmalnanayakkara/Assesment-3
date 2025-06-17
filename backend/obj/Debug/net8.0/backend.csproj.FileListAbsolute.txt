@@ -30,3 +30,15 @@ E:\Assement - 2\backend\obj\Debug\net8.0\refint\backend.dll
 E:\Assement - 2\backend\obj\Debug\net8.0\backend.pdb
 E:\Assement - 2\backend\obj\Debug\net8.0\backend.genruntimeconfig.cache
 E:\Assement - 2\backend\obj\Debug\net8.0\ref\backend.dll
+E:\Assement - 2\backend\obj\Debug\net8.0\backend.sourcelink.json
+E:\Assement - 2\backend\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+E:\Assement - 2\backend\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+E:\Assement - 2\backend\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+E:\Assement - 2\backend\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+E:\Assement - 2\backend\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+E:\Assement - 2\backend\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+E:\Assement - 2\backend\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+E:\Assement - 2\backend\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+E:\Assement - 2\backend\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+E:\Assement - 2\backend\bin\Debug\net8.0\MySqlConnector.dll
+E:\Assement - 2\backend\bin\Debug\net8.0\Pomelo.EntityFrameworkCore.MySql.dll

@@ -24,18 +24,33 @@ export class SignInComponent {
   constructor(private appService: AppService, private router: Router) {}
 
   onSubmit() {
+    const { username, password } = this.signInForm.value;
     const data = {
-      Username: this.signInForm.controls.username,
-      Password: this.signInForm.controls.password,
+      Username: username,
+      Password: password,
     };
 
-    const sub = this.appService.signInUser(data).subscribe(
-      (data) => {
-        console.log(data);
-
+    this.appService.signInUser(data).subscribe(
+      (response) => {
+        const data = response.Response_Body[0].User_Locations;
         this.router.navigate(['/purchase-bill-form']);
+        const filteredLocations = data.map((loc: any) => ({
+          Location_Code: loc.Location_Code,
+          Location_Name: loc.Location_Name,
+        }));
+
+        this.appService.saveUserLocations(filteredLocations).subscribe(
+          (res) => {
+            console.log('Saved to DB:', res);
+            this.router.navigate(['/purchase-bill-form']);
+          },
+          (err) => {
+            console.error('Error saving locations:', err);
+          }
+        );
       },
       (error) => {
+        console.error(error);
         this.router.navigate(['']);
       }
     );
