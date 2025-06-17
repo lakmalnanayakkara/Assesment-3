@@ -1,0 +1,96 @@
+<mat-card class="p-4">
+  <form [formGroup]="form" class="grid grid-cols-2 gap-4">
+    <mat-form-field appearance="fill">
+      <mat-label>Item</mat-label>
+      <input
+        type="text"
+        matInput
+        [matAutocomplete]="auto"
+        formControlName="item"
+      />
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let item of items" [value]="item">
+          {{ item }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Batch</mat-label>
+      <mat-select formControlName="batch">
+        <mat-option *ngFor="let loc of locationNames" [value]="loc">{{
+          loc
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Standard Cost</mat-label>
+      <input type="number" matInput formControlName="standardCost" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Standard Price</mat-label>
+      <input type="number" matInput formControlName="standardPrice" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Quantity</mat-label>
+      <input type="number" matInput formControlName="quantity" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Discount (%)</mat-label>
+      <input type="number" matInput formControlName="discount" />
+    </mat-form-field>
+  </form>
+
+  <div class="my-4">
+    <p><strong>Total Cost:</strong> {{ totalCost }}</p>
+    <p><strong>Total Selling:</strong> {{ totalSelling }}</p>
+  </div>
+
+  <button mat-raised-button color="primary" (click)="onAdd()">Add</button>
+</mat-card>
+
+<mat-card class="mt-6">
+  <h3>Items Summary</h3>
+  <table mat-table dataSource="addedItems" class="w-full mt-4" matSort>
+    <ng-container matColumnDef="item">
+      <th mat-header-cell *matHeaderCellDef>Item</th>
+      <td mat-cell *matCellDef="let row">{{ row.item }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef>Quantity</th>
+      <td mat-cell *matCellDef="let row">{{ row.quantity }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="totalCost">
+      <th mat-header-cell *matHeaderCellDef>Total Cost</th>
+      <td mat-cell *matCellDef="let row">{{ row.totalCost }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="totalSelling">
+      <th mat-header-cell *matHeaderCellDef>Total Selling</th>
+      <td mat-cell *matCellDef="let row">{{ row.totalSelling }}</td>
+    </ng-container>
+
+    <tr
+      mat-header-row
+      *matHeaderRowDef="['item', 'quantity', 'totalCost', 'totalSelling']"
+    ></tr>
+    <tr
+      mat-row
+      *matRowDef="
+        let row;
+        columns: ['item', 'quantity', 'totalCost', 'totalSelling']
+      "
+    ></tr>
+  </table>
+
+  <div class="mt-4">
+    <p><strong>Total Items:</strong> {{ addedItems.length }}</p>
+    <p><strong>Total Quantity:</strong> {{ totalQuantity }}</p>
+  </div>
+</mat-card>
